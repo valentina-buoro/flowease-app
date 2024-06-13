@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <title>Confirm Email</title>
+    <style>
+      table,
+      td,
+      tr {
+        border-collapse: collapse;
+      }
+      @media screen and (max-width: 501px) {
+        .content {
+          padding: 24px 24px 24px 16px !important;
+        }
+        .content-container {
+          width: 100% !important;
+        }
+      }
+      @media (max-width: 600px) {
+        a {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body style="background: #f8f8fc; padding-bottom: 82px">
+    <div
+      role="article"
+      aria-roledescription="email"
+      style="
+        text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      "
+    >
+      <table
+        role="presentation"
+        style="
+          border-collapse: collapse;
+          width: 100%;
+          padding: 0px 110px;
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          line-height: normal;
+        "
+      >
+        <tr>
+          <td
+            style="
+              height: 51px;
+              vertical-align: middle;
+              text-align: center;
+              padding: 48px 0px;
+            "
+          >
+            <img
+              src="https://i.postimg.cc/wMw8z3Bc/FlowEase.png"
+              width="150px"
+              alt="header"
+              border="0"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 0">
+            <div
+              class="content-container"
+              style="
+                border-radius: 10px;
+                width: 60%;
+                margin: 0px auto;
+                overflow: hidden;
+              "
+            >
+              <table>
+                <tr>
+                  <td style="padding: 0">
+                    <table style="width: 100%">
+                      <tr>
+                        <td
+                          class="content"
+                          style="
+                            padding: 10px 41px 46px;
+                            font-size: 18px;
+                            font-weight: 400;
+                            background: #fff;
+                            color: #000304;
+                            word-wrap: break-word;
+                            word-break: break-word;
+                          "
+                        >
+                          <div>
+                            <p
+                              style="
+                                color: #121a26;
+                                font-family: 'DM Sans', sans-serif;
+                                line-height: 30px;
+                                font-size: 20px;
+                                font-weight: 700;
+                              "
+                            >
+                              Confirm your email address
+                            </p>
+                            <p
+                              style="
+                                color: #384860;
+                                font-family: 'DM Sans', sans-serif;
+                                font-size: 18px;
+                                font-weight: 400;
+                              "
+                            >
+                              Hi <%= full_name %>,
+                              <br />
+                              <br />
+                              Thank you for signing up with FlowEase!
+                              <br />
+                              <br />
+                              To complete your registration and get started with
+                              our project management platform, please confirm
+                              your email address by clicking the link below:
+                              <br />
+                              <br />
+							  <a
+                                  href="https://redundant-discussion-zesty-star-production.pipeops.app/api/users/verify/?email=<%=email %>"
+                                  >[Confirm Email]</a
+                                >
+                              <br />
+                              <br />
+                              If you didn't sign up for FlowEase, please ignore
+                              this email.
+                              <br />
+                              <br />
+                              We're excited to have you on board and look
+                              forward to helping you manage your projects with
+                              ease.
+                              <br />
+                              <br />
+                              Thanks,
+                              <br />
+
+                              FlowEase Team
+                            </p>
+                          </div>
+                          <section
+                            style="
+                              color: #6a6a6a;
+                              font-size: 16px;
+                              font-weight: 400;
+                            "
+                          >
+                            <div>
+                              <button
+                                style="
+                                  background-color: #2969ff;
+                                  border: none;
+                                  padding-left: 40px;
+                                  padding-right: 40px;
+                                  padding-top: 20px;
+                                  padding-bottom: 20px;
+                                "
+                              >
+                                <a
+                                  href="https://redundant-discussion-zesty-star-production.pipeops.app/api/users/verify/?email=<%=email %>"
+                                  style="text-decoration: none; color: white"
+                                  >Confirm Email Address</a
+                                >
+                              </button>
+                              ​
+                            </div>
+                            <section style="margin-top: 23.01px">
+                              <table style="width: 100%">
+                                <tr>
+                                  <td
+                                    style="
+                                      text-align: center;
+                                      vertical-align: middle;
+                                    "
+                                  >
+                                    <p
+                                      style="
+                                        margin: 0px;
+                                        font-size: 11.545px;
+                                        line-height: 17.318px;
+                                      "
+                                    >
+                                      Sent by FlowEase Copyright &copy; 2024
+                                      Flowease
+                                      <br />
+                                      Lagos State, Nigeria
+                                    </p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </section>
+                          </section>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
