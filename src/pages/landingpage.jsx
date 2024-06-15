@@ -15,8 +15,6 @@ const LandingPage = () => {
         <Trust/>
         <Contact/>
         <Footer/>
-     <div >Testing</div>
-     <div className='bg-[red]'>Testing ttteee</div>
     </div>
   )
 }
