@@ -3,7 +3,7 @@ import HeroImage from "../../assets/svgs/hero.svg";
 
 const Hero = () => {
   return (
-    <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center justify-between  px-4 lg:px-0">
+    <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center justify-between  px-4 pb-5 lg:px-0">
       {/* Content */}
       <div className="w-full lg:w-1/2 lg:pr-8 flex flex-col gap-5">
         <h1 className="text-xl sm:text-3xl text-center lg:text-left lg:text-4xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
@@ -17,7 +17,7 @@ const Hero = () => {
 
         <div className="md:flex flex-col md:flex-row gap-6 mt-3 hidden">
           <Link to="/create-payment" className="route-link">
-            <button className="bg-primaryBlue md:w-[220px] w-full text-[#ffff] rounded-md py-5 font-bold">
+            <button className="bg-primaryBlue px-10 text-[#ffff] rounded-md py-3 font-bold">
               Get Started
             </button>
           </Link>
