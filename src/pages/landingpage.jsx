@@ -5,6 +5,7 @@ import Features from '../components/landingpageComponents/features'
 import Trust from '../components/landingpageComponents/trust'
 import Footer from '../components/landingpageComponents/footer'
 import Contact from '../components/landingpageComponents/contact'
+import Pricing from '../components/landingpageComponents/pricing'
 
 const LandingPage = () => {
   return (
@@ -12,6 +13,7 @@ const LandingPage = () => {
         <Navbar/>
         <Hero/>
         <Features/>
+        <Pricing/>
         <Trust/>
         <Contact/>
         <Footer/>
