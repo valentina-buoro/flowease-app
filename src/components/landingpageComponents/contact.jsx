@@ -29,8 +29,8 @@ const Contact = () => {
       <div className="grid grid-cols-7 gap-4 mx-auto mt-10">
         <form className="col-span-4"></form>
         <div className="col-span-3">
-          <div>
-            <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <p className="font-bold text-xl">
                 Email:
                 <span className="font-medium text-[#8E8E93]">
