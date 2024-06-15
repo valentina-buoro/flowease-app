@@ -5,7 +5,7 @@ const Features = () => {
     <div className='bg-[#F3F6FF]'>
       <div className='text-center'>
         <p className='text-[#1E1F24] font-bold text-5xl'>Features</p>
-        <p className='text-[#8E8E93] font-normal text-2xl'></p>
+        <p className='text-[#8E8E93] font-normal text-2xl'>Streamline Your Workflow and Boost Productivity</p>
       </div>
 </div>
   )
