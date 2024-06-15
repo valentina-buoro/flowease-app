@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/svgs/logo.svg";
+import Logo from "../../assets/svgs/dashboardLogo.svg";
 import { NavLink } from "react-router-dom";
 import {
   TbLayoutDashboard,
