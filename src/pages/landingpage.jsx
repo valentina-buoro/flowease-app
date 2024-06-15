@@ -15,6 +15,7 @@ const LandingPage = () => {
         <Trust/>
         <Contact/>
         <Footer/>
+     <div>Testing</div>
     </div>
   )
 }
