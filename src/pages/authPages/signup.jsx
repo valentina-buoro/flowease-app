@@ -29,14 +29,7 @@ const Signup = () => {
     });
   };
 
-  // -------- Redirect user if logged in -----------------
-  /*useEffect(() => {
-    if (isLoggedIn) {
-      navigate(user.type === "patient" ? "/patient" : "/doctor");
-    }
-  }, [isLoggedIn, navigate, user?.type]);*/
-
-  // ------------- Reuseable Registration Function -------------------------
+  
   const submitFormData = async () => {
     if (
       formData.full_name === "" ||
@@ -63,7 +56,7 @@ const Signup = () => {
         setLoading(false);
         toast.success('User created successfully!', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -73,7 +66,7 @@ const Signup = () => {
         });
         toast.success('Please check your email to verify your account!', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 8000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
