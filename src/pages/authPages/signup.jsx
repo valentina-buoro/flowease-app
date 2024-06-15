@@ -114,8 +114,8 @@ const Signup = () => {
 
   return (
     <div className=" w-full ">
-      <div className=" bg-[#F8F9FE] w-full  flex justify-center items-center py-10 md:py-20">
-        <div className="sub-text bg-[#fff] px-6 md:px-14 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl ">
+      <div className=" bg-[#F8F9FE] w-full min-h-screen overflow-scroll flex justify-center items-center py-10 md:py-20">
+        <div className="sub-text bg-[#fff] mt-10 px-6 md:px-14 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl ">
           <div className=" mx-auto flex w-full max-w-md flex-col space-y-9 ">
             <div className="flex flex-col items-center justify-center text-center">
               <img src={Logo} alt="logo" className="w-32" />
@@ -128,8 +128,8 @@ const Signup = () => {
 
             <div>
               <form>
-                <div className="relative w-full mb-10">
-                  <div className="absolute inset-0 border border-[#1B1D21] opacity-10 rounded-3xl pointer-events-none"></div>
+                <div className="relative w-full mb-10 ">
+                  <div className="absolute inset-0 border border-[#1B1D21] rounded-3xl pointer-events-none "></div>
                   <label className="absolute -top-2 left-2 bg-[#fff] px-1  text-sm">
                     Full Name
                   </label>
@@ -143,7 +143,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="relative w-full my-10">
-                  <div className="absolute inset-0 border border-[#1B1D21] opacity-10 rounded-3xl pointer-events-none"></div>
+                  <div className="absolute inset-0 border border-[#1B1D21] rounded-3xl pointer-events-none"></div>
                   <label className="absolute -top-2 left-2 bg-[#fff] px-1  text-sm">
                     Email
                   </label>
@@ -158,7 +158,7 @@ const Signup = () => {
                 </div>
 
                 <div className="relative w-full my-10">
-                  <div className="absolute inset-0 border border-[#1B1D21] opacity-10 rounded-3xl pointer-events-none"></div>
+                  <div className="absolute inset-0 border border-[#1B1D21]  rounded-3xl pointer-events-none"></div>
                   <label className="absolute -top-2 left-2 bg-[#fff] px-1  text-sm">
                     Password
                   </label>
@@ -172,7 +172,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="relative w-full my-10">
-                  <div className="absolute inset-0 border border-[#1B1D21] opacity-10 rounded-3xl pointer-events-none"></div>
+                  <div className="absolute inset-0 border border-[#1B1D21] rounded-3xl pointer-events-none"></div>
                   <label className="absolute -top-2 left-2 bg-[#fff] px-1  text-sm">
                     Confirm Password
                   </label>
@@ -223,16 +223,7 @@ const Signup = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .container {
-          position: relative;
-        }
-
-        .sub-text {
-          position: relative;
-          z-index: 1; /* Ensure text appears above the overlay */
-        }
-      `}</style>
+      
     </div>
   );
 };

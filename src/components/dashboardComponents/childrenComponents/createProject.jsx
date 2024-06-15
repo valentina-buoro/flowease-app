@@ -12,6 +12,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
   const URL = "https://flowease.onrender.com/api";
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line
   const [errorMessage, setErrorMessage] = useState("");
   const [budgets, setBudgets] = useState([]);
   //const [task, setTask] = useState('');
