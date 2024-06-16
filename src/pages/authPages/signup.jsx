@@ -178,7 +178,7 @@ const Signup = () => {
                 </div>
 
                 <div className="flex items-start">
-                  {/*<input type="checkbox" className="mr-2"  />*/}
+                  <input type="checkbox" className="mr-2" required />
                   <span className="font-medium text-xs ">
                     By creating your account, you agree to the Terms of Service
                     and Privacy Policy
