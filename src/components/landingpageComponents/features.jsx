@@ -38,7 +38,7 @@ const Features = () => {
               <img src={featuresThree} alt="features-one" />
             </div>
             <p className="text-center font-bold text-[#1E1F24] py-4">Integrations with Popular Productivity Tools</p>
-            <p className="font-normal text-sm text-[#444750] text-center">Seamlessly connect with tools like Trello, Asana, and Google Calendar.</p>
+            <p className="font-normal text-sm text-[#444750] text-center">Seamlessly connect with tools for productivity ie. Google Calendar.</p>
           </div>
           <div className="bg-[#FFFFFF] rounded-2xl p-10 ml-auto w-11/12">
             <div className="flex justify-center">
