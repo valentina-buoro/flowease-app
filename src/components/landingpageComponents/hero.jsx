@@ -5,11 +5,11 @@ const Hero = () => {
   return (
     <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center justify-between  px-4 pb-5 lg:px-0">
       {/* Content */}
-      <div className="w-full lg:w-1/2 lg:pr-8 flex flex-col gap-5">
-        <h1 className="text-xl sm:text-3xl text-center lg:text-left lg:text-4xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
+      <div className="w-full lg:w-3/5 lg:pr-8 flex flex-col gap-5">
+        <h1 className="text-xl sm:text-3xl text-center lg:text-left lg:text-5xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
           Optimize Your Productivity and <span className="text-primaryGreen">Performance</span>
         </h1>
-        <p className="text-base text-center lg:text-left lg:text-lg font-medium text-secondaryGrey">
+        <p className="text-base text-center lg:text-left lg:text-xl font-medium text-secondaryGrey">
           Flowease is that vision made real. It's your one-stop shop for
           streamlining accountability, task management, and reveling in shared
           success.
@@ -43,7 +43,7 @@ const Hero = () => {
       </div>
 
       {/* Image */}
-      <div className="w-full text-center lg:w-1/2 lg:mt-8 mt-7">
+      <div className="w-full text-center lg:w-2/5 lg:mt-8 mt-7">
         <img className="w-full h-auto mx-auto" src={HeroImage} alt="svg" />
       </div>
     </div>
