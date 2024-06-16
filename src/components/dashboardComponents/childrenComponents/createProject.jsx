@@ -107,7 +107,7 @@ setLoading(true);
           end_date: "",
           collaborators: [""],
         });
-        navigate("/dashboard");
+        navigate("/projects");
       } else {
         setLoading(false);
         setErrorMessage(res.data.message);
