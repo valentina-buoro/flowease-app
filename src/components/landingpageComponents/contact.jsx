@@ -26,8 +26,27 @@ const Contact = () => {
           Have a question, comment, or need support?
         </p>
       </div>
-      <div className="grid grid-cols-7 gap-4 mx-auto mt-10">
-        <form className="col-span-4"></form>
+      <div className="grid grid-cols-7 gap-4 mx-auto my-10">
+        <form className="col-span-4">
+          <div className="bg-white shadow-lg rounded-[10px] w-9/12 mx-auto p-5">
+          <p className="text-primaryBlue text-4xl font-bold">Get In Touch</p>
+            <div className="flex flex-col gap-2">
+              <label>Name</label>
+              <input className="border border-[#979797] outline-none py-2.5 px-1 rounded-[10px]"/>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label>Email</label>
+              <input className="border border-[#979797] outline-none py-2.5 px-1 rounded-[10px]"/>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label>Message</label>
+              <textarea className="border border-[#979797] outline-none py-2.5 px-1 rounded-[10px]"/>
+            </div>
+            <div className="flex items-center justify-start mt-4"><button className="bg-primaryBlue  text-[#ffff] rounded-xl py-2.5 px-7  font-bold">
+                Submit
+              </button></div>
+          </div>
+        </form>
         <div className="col-span-3">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
