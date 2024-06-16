@@ -128,7 +128,7 @@ const Login = () => {
 
                 <div className="flex justify-between">
                   <div className="flex items-start">
-                    <input type="checkbox" className="mr-2" required />
+                    {/*<input type="checkbox" className="mr-2" required />*/}
                     <span className="font-medium text-xs ">Remember me</span>
                   </div>
                   <div className="flex items-start">

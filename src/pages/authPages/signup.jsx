@@ -5,9 +5,7 @@ import axios from "axios";
 import Logo from "../../assets/svgs/logo.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import Loader from "../components/Loader";
-//import MessageAlert from "../components/MessageAlert";
-//import useAuthStore from "../stores/authStore";
+
 
 const Signup = () => {
   
@@ -180,7 +178,7 @@ const Signup = () => {
                 </div>
 
                 <div className="flex items-start">
-                  <input type="checkbox" className="mr-2" required />
+                  {/*<input type="checkbox" className="mr-2"  />*/}
                   <span className="font-medium text-xs ">
                     By creating your account, you agree to the Terms of Service
                     and Privacy Policy

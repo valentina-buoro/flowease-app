@@ -16,7 +16,7 @@ const Hero = () => {
         </p>
 
         <div className="md:flex flex-col md:flex-row gap-6 mt-3 hidden">
-          <Link to="/create-payment" className="route-link">
+          <Link to="/signup" className="route-link">
             <button className="bg-primaryBlue px-10 text-[#ffff] rounded-md py-3 font-bold">
               Get Started
             </button>
