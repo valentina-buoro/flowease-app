@@ -6,10 +6,10 @@ const Hero = () => {
     <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center justify-between  px-4 pb-5 lg:px-0">
       {/* Content */}
       <div className="w-full lg:w-3/5 lg:pr-8 flex flex-col gap-5">
-        <h1 className="text-xl sm:text-3xl text-center lg:text-left lg:text-5xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
+        <h1 className="text-xl sm:text-3xl text-left  md:text-5xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
           Optimize Your Productivity and <span className="text-primaryGreen">Performance</span>
         </h1>
-        <p className="text-base text-center lg:text-left lg:text-xl font-medium text-secondaryGrey">
+        <p className="text-base text-left lg:text-xl font-medium text-secondaryGrey">
           Flowease is that vision made real. It's your one-stop shop for
           streamlining accountability, task management, and reveling in shared
           success.
