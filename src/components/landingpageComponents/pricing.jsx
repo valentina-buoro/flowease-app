@@ -4,7 +4,7 @@ import price from "../../assets/svgs/landingpageSvg/priceCheckingTwo.svg";
 
 const Pricing = () => {
   const [show, setShow] = React.useState(true);
-  const [free, setFree] = React.useState(false);
+  const [free, setFree] = React.useState(true);
   const [basic, setBasic] = React.useState(false);
   const [premium, setPremium] = React.useState(false);
   return (
