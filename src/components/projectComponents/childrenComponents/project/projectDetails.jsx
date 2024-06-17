@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "../../../utilComponents/table";
 import Modal from "react-modal";
+import { formatISODate } from "../../../utilComponents/formatDate";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { FaAsterisk } from "react-icons/fa";
@@ -31,7 +32,7 @@ const ProjectDetails = () => {
         );
         console.log(data);
         setProjectDetails(data.message);
-        console.log("assigned", data.message.milestones);
+        console.log("assigned milestone", data.message.milestones);
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -40,42 +41,16 @@ const ProjectDetails = () => {
     fetchProjects();
   }, [id]);
 
-  const data = [
-    {
-      id: 1,
-      email: "valentina@yahoo.com",
-      phone: "9876543210",
-      status: "active",
-      created_at: "2021-08-09T12:12:12.000Z",
-    },
-    {
-      id: 2,
-      email: "valentina@yahoo.com",
-      phone: "9876543210",
-      status: "active",
-      created_at: "2021-08-09T12:12:12.000Z",
-    },
-    {
-      id: 3,
-      email: "valentina@yahoo.com",
-      phone: "9876543210",
-      status: "active",
-      created_at: "2021-08-09T12:12:12.000Z",
-    },
-    {
-      id: 4,
-      email: "valentina@yahoo.com",
-      phone: "9876543210",
-      status: "active",
-      created_at: "2021-08-09T12:12:12.000Z",
-    },
-  ];
+  
 
   const columns = [
     { header: "S/N", accessor: "id" },
-    { header: "Email Address", accessor: "email" },
-    { header: "Status", accessor: "status" },
-    { header: "Due Date", accessor: "created_at" },
+    {header:"Task Name", accessor: "name"},
+    {header:"Due Date", accessor: "due_date"},
+    { header: "Assigned To", accessor: "collaborator" },
+    { header: "Status", accessor: "started" },
+    {header: "Action", accessor: "action"}
+   
   ];
 
   const navigate = useNavigate();
@@ -222,13 +197,13 @@ const ProjectDetails = () => {
                 <div className="flex flex-col gap-2 ">
                   <span className="text-[#979797] text-xs">Start Date</span>
                   <span className="text-[#1A1817] text-xs font-medium">
-                    01, Feb 2024
+                   { projectDetails ? formatISODate(projectDetails?.start_date): ''}
                   </span>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-[#979797] text-xs">Due Date</span>
                   <span className="text-[#1A1817] text-xs font-medium">
-                    20, Feb 2024
+                   { projectDetails ? formatISODate(projectDetails?.end_date):''}
                   </span>
                 </div>
               </div>
@@ -292,7 +267,7 @@ const ProjectDetails = () => {
               Add New Task
             </button>
           </div>
-          <Table columns={columns} data={ data&& projectDetails.milestones} />
+          <Table columns={columns} data={ projectDetails&& projectDetails.milestones} />
 
           <Modal
             isOpen={showing}

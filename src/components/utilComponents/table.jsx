@@ -1,9 +1,9 @@
 import React from "react";
-import { formatDate } from "./formatDate";
+import { formatISODate } from "./formatDate";
 
 const Table = ({ columns, data }) => {
-  const getStatusColor = (status) => {
-    switch (status) {
+  const getStatusColor = (started) => {
+    switch (started) {
       case "successful":
         return "#D1FFC9";
       case "active":
@@ -12,7 +12,7 @@ const Table = ({ columns, data }) => {
         return "#D1FFC9";
       case "pending":
         return "#FCCFCF";
-      case "in_progress":
+      case "false":
         return "#FFA07A";
       case "failed":
         return "#D9D9D9";
@@ -45,9 +45,9 @@ const Table = ({ columns, data }) => {
           <tr key={rowIndex}>
             {columns.map((column, colIndex) => (
               <td key={colIndex} className="border-none pt-2" >
-                {column.accessor === "created_at" ||
-                column.accessor === "createdAt" ? (
-                  formatDate(row[column.accessor])
+                {column.accessor === "due_date" ||
+                column.accessor === "dueDate" ? (
+                  formatISODate(row[column.accessor])
                 ) : column.accessor === "profilePhoto" ? (
                   <img
                     src={row[column.accessor] ? row[column.accessor] : ""}
@@ -56,7 +56,7 @@ const Table = ({ columns, data }) => {
                   />
                 ) : column.accessor === "phone" && !row[column.accessor] ? (
                   "N/A"
-                ) : column.accessor === "status" ? (
+                ) : column.accessor === "status" || column.accessor === "started" ? (
                   <p
                     className=" text-[12px] p-1 text-center font-normal w-20 rounded-md"
                     style={{
