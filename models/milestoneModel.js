@@ -20,14 +20,12 @@ const milestoneSchema = mongoose.Schema({
     collaborator: {
         type: String
     },
-    started: {
-        type: Boolean,
-        default: false
-    },
-    completed: {
-        type: Boolean,
-        default: false
+    status: {
+        type: String,
+        enum: ['Not started', 'Started', 'Completed'],
+        required: true,
+        default: 'Not started'
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Milestone', milestoneSchema)
