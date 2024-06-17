@@ -32,7 +32,7 @@ const Table = ({ columns, data }) => {
   return (
     <table className="mt-6 w-full">
       <thead className=" h-10">
-        <tr className="text-[16px] text-left bg-[#EDEDEE]">
+        <tr className="text-[16px] text-center text-[#4A4A4C] bg-[#EDEDEE]">
           {columns.map((column, index) => (
             <th className="font-medium " key={index}>
               {column.header}
@@ -40,12 +40,15 @@ const Table = ({ columns, data }) => {
           ))}
         </tr>
       </thead>
-      <tbody className="text-[12px]">
+      <tbody className="text-base text-[#1A1817] text-center">
         {data.map((row, rowIndex) => (
-          <tr key={rowIndex}>
+          <tr key={rowIndex} className="">
             {columns.map((column, colIndex) => (
-              <td key={colIndex} className="border-none pt-2" >
-                {column.accessor === "due_date" ||
+              <td key={colIndex} className="border-none py-3" >
+                {column.accessor === "id" ||
+                column.accessor === "_id" ? (
+                  row[column.accessor]===rowIndex+1?row[column.accessor]:rowIndex+1
+                ):column.accessor === "due_date" ||
                 column.accessor === "dueDate" ? (
                   formatISODate(row[column.accessor])
                 ) : column.accessor === "profilePhoto" ? (

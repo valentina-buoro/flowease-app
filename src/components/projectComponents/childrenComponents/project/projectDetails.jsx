@@ -44,7 +44,7 @@ const ProjectDetails = () => {
   
 
   const columns = [
-    { header: "S/N", accessor: "id" },
+    { header: "S/N", accessor: "_id" },
     {header:"Task Name", accessor: "name"},
     {header:"Due Date", accessor: "due_date"},
     { header: "Assigned To", accessor: "collaborator" },
