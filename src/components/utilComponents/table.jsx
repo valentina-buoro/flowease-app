@@ -12,7 +12,7 @@ const Table = ({ columns, data }) => {
         return "#D1FFC9";
       case "pending":
         return "#FCCFCF";
-      case "false":
+      case false:
         return "#FFA07A";
       case "failed":
         return "#D9D9D9";
@@ -61,12 +61,12 @@ const Table = ({ columns, data }) => {
                   "N/A"
                 ) : column.accessor === "status" || column.accessor === "started" ? (
                   <p
-                    className=" text-[12px] p-1 text-center font-normal w-20 rounded-md"
+                    className="  rounded-md"
                     style={{
                       backgroundColor: getStatusColor(row[column.accessor]),
                     }}
                   >
-                    {row[column.accessor]}
+                    {row[column.accessor]===false ? "Pending" : row[column.accessor]}
                   </p>
                 ) : (
                   row[column.accessor]
