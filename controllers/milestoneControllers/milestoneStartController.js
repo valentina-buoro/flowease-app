@@ -30,19 +30,19 @@ async function markMilestoneStarted(req, res) {
     const project_owner_id = milestoneProject.project_id.user_id;
     console.log("project_owner_id", project_owner_id);
 
-    if (milestone.started) {
+    if (milestone.status === 'Started') {
       return res
         .status(400)
         .json({ success: false, message: "Milestone already started" });
       }
-    if (milestone.completed) {
+    if (milestone.status === 'Completed') {
       return res
         .status(400)
         .json({ success: false, message: "Milestone already completed" });
       }
       
     if (user_id == collaborator._id) {
-      await MilestoneModel.findByIdAndUpdate(milestone_id, { started: true });
+      await MilestoneModel.findByIdAndUpdate(milestone_id, { status: 'Started' });
 
       // emit a notification to client when milestone is started
       const io = req.io;
