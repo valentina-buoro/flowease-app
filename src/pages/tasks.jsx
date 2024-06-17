@@ -1,8 +1,11 @@
 import React from 'react'
+import TaskComponent from '../components/taskComponent/taskComponent'
 
 const Tasks = () => {
   return (
-    <div>Tasks</div>
+    <div>
+      <TaskComponent/>
+    </div>
   )
 }
 
