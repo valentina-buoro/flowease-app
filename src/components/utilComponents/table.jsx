@@ -1,21 +1,27 @@
 import React from "react";
 import { formatISODate } from "./formatDate";
+import Edit from '../../assets/svgs/edit.svg'
 
 const Table = ({ columns, data }) => {
-  const getStatusColor = (started) => {
-    switch (started) {
-      case "successful":
-        return "#D1FFC9";
-      case "active":
-        return "#D1FFC9";
-      case "resolved":
-        return "#D1FFC9";
-      case "pending":
-        return "#FCCFCF";
+  const getStatusColor = (started ,completed) => {
+    switch (started ) {
       case false:
         return "#FFA07A";
-      case "failed":
+      case  true:
+        return "#E9FFF4";
+      case "suspended":
+        return "#FCCFCF";
+      case "closed":
+        return "#FCCFCF";
+      case "blocked":
+        return "#FCCFCF";
+      case "inactive":
         return "#D9D9D9";
+      default:
+    }
+    switch (completed ) {
+      case  true:
+        return "#E9FFF4";
       case "suspended":
         return "#FCCFCF";
       case "closed":
@@ -27,6 +33,7 @@ const Table = ({ columns, data }) => {
       default:
         return "transparent";
     }
+  
   };
 
   return (
@@ -61,13 +68,17 @@ const Table = ({ columns, data }) => {
                   "N/A"
                 ) : column.accessor === "status" || column.accessor === "started" ? (
                   <p
-                    className="  rounded-md"
+                    className=" text-center rounded-md"
                     style={{
                       backgroundColor: getStatusColor(row[column.accessor]),
                     }}
                   >
-                    {row[column.accessor]===false ? "Pending" : row[column.accessor]}
+                    {row[column.accessor]===false ? "Pending" : "completed"}
                   </p>
+                ) :column.header === "Action" ? (
+                 <button className="bg-[#E9EDFF]  rounded-md p-1">
+                    <img src={Edit} className="w-[15px] h-[15px]" alt="edit" />
+                  </button>
                 ) : (
                   row[column.accessor]
                 )}

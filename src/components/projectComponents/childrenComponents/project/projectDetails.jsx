@@ -48,7 +48,7 @@ const ProjectDetails = () => {
     {header:"Task Name", accessor: "name"},
     {header:"Due Date", accessor: "due_date"},
     { header: "Assigned To", accessor: "collaborator" },
-    { header: "Status", accessor: "started" },
+    { header: "Status", accessor: "started" || "completed" },
     {header: "Action", accessor: "action"}
    
   ];
