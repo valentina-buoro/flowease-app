@@ -6,7 +6,7 @@ async function getProjectById (req, res) {
         if (!project_id) {
             return res.status(400).json({success: false, message: 'Please provide project_id'})
         }
-        const project = await ProjectModel.findById(project_id).select('-password -__v')
+        const project = await ProjectModel.findById(project_id).select('-password -__v').populate('milestones')
         if (!project) {
             return res.status(404).json({success: false, message: 'Project not found'})
         }
