@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ProjectDetails from "../components/projectComponents/childrenComponents/project/projectDetails";
 
-const ProjectDetails = () => {
+const ProjectDetailsPage = () => {
   return (
-    <div>ProjectDetails</div>
-  )
-}
+    <div>
+      <ProjectDetails />
+    </div>
+  );
+};
 
-export default ProjectDetails
+export default ProjectDetailsPage;
