@@ -6,7 +6,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { FaAsterisk } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ProjectDetails = () => {
   const URL = "https://flowease.onrender.com/api";
@@ -31,7 +31,7 @@ const ProjectDetails = () => {
         );
         console.log(data);
         setProjectDetails(data.message);
-        console.log("assigned", data.message);
+        console.log("assigned", data.message.milestones);
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -157,7 +157,7 @@ const ProjectDetails = () => {
         progress: undefined,
         theme: "light",
       });
-      console.log("task", data);
+      console.log("task", data.milestones);
     }
   };
 
@@ -169,7 +169,7 @@ const ProjectDetails = () => {
 
           <IoIosArrowRoundForward className="text-[#696969]" size={30} />
 
-          <span className="text-[#696969]">Projects</span>
+          <span className="text-[#696969] cursor-pointer"><Link className='no-underline text-[#696969]' to ='/projects'>Projects</Link></span>
           <IoIosArrowRoundForward className="text-[#696969]" size={30} />
 
           <span className="text-textBlack">Project details</span>
@@ -186,8 +186,8 @@ const ProjectDetails = () => {
         <button
           className={
             show
-              ? "text-xl font-bold text-primaryBlue border-b border-b-primaryBlue mb-5"
-              : " text-xl font-bold  mb-5 "
+              ? "text-xl font-bold text-primaryBlue border-b border-b-primaryBlue mb-5 cursor-pointer"
+              : " text-xl font-bold  mb-5 cursor-pointer"
           }
           onClick={() => setShow(true)}
         >
@@ -196,8 +196,8 @@ const ProjectDetails = () => {
         <button
           className={
             !show
-              ? "text-xl font-bold text-primaryBlue border-b border-b-primaryBlue mb-5"
-              : "text-xl font-bold  mb-5"
+              ? "text-xl font-bold text-primaryBlue border-b border-b-primaryBlue mb-5 cursor-pointer"
+              : "text-xl font-bold  mb-5 cursor-pointer"
           }
           onClick={() => setShow(false)}
         >
@@ -216,7 +216,7 @@ const ProjectDetails = () => {
                 <div className="flex flex-col gap-2 ">
                   <span className="text-[#979797] text-xs">Task</span>
                   <span className="text-[#1A1817] text-xs font-medium text-center">
-                    {projectDetails ? projectDetails?.milestones : ""}
+                    {projectDetails ? projectDetails?.milestones?.length : ""}
                   </span>
                 </div>
                 <div className="flex flex-col gap-2 ">
@@ -292,7 +292,7 @@ const ProjectDetails = () => {
               Add New Task
             </button>
           </div>
-          <Table columns={columns} data={data} />
+          <Table columns={columns} data={ data&& projectDetails.milestones} />
 
           <Modal
             isOpen={showing}
