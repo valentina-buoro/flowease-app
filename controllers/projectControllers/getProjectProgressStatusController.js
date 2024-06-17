@@ -24,13 +24,13 @@ async function getProjectProgressStatus(req, res) {
           return res.status(200).json({success: true, message: 'No milestones'})
       }
       
-      const allCompleted = milestones.every(milestone => milestone.completed === true)
+      const allCompleted = milestones.every(milestone => milestone.status === 'Completed')
 
       if (allCompleted) {
           return res.status(200).json({success: true, message: 'Completed'})
       }
 
-      const anyStarted = milestones.some(milestone => milestone.started === true)
+      const anyStarted = milestones.some(milestone => milestone.status === 'Started')
 
       if (anyStarted) {
         return res.status(200).json({success: true, message: 'Ongoing'})
