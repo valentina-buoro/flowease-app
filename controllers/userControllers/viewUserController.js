@@ -10,7 +10,7 @@ async function getUserById(req, res) {
         if (!user) {
             return res.status(404).json({success: false, message: 'User not found'})
         }
-        res.status(200).json({success: true, message: {_id: user._id, email: user.email, full_name: user.full_name, verified: user.verified}}) 
+        res.status(200).json({success: true, message: {_id: user._id, email: user.email, full_name: user.full_name, verified: user.verified, profile_picture: user.profile_picture}}) 
         
     } catch (error) {
         console.error(error.message)
