@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
         profile_picture: {
             type: String
         }
-    }
+    }, {timestamps: true}
 )
 
 userSchema.pre('save', async function (next) {
