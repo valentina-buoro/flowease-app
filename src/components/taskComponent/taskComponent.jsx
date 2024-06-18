@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { CircleLoader } from "react-spinners";
 import Table from "../utilComponents/table";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { toast } from "react-toastify";
@@ -117,7 +118,7 @@ const TaskComponent = () => {
           onChange={(e) => {}}
         />
       </div>
-      
+      {loading ? <div className="  h-screen "><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
       <Table columns={columns} data={projectDetails} />
     </div>
   );
