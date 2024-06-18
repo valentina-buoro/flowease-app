@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   
-  const URL = "https://flowease.onrender.com/api";
+  const URL = "https://redundant-discussion-zesty-star-production.pipeops.app/api";
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",

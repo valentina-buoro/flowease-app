@@ -14,7 +14,7 @@ const Dashboard = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          `https://flowease.onrender.com/api/users/user`,
+          `https://redundant-discussion-zesty-star-production.pipeops.app/api/users/user`,
           {
             headers: {
               Authorization: `${token}`,
