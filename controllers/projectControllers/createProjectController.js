@@ -19,10 +19,12 @@ async function createProject(req, res) {
       
         const projectNameRegex = /^[a-zA-Z0-9\s!#$+,-.@_]+$/;
 
+      // Validate project name
     if (!projectNameRegex.test(name)) {
         return res.status(400).json({ success: false, message: "Project name contains invalid characters. Only alphabets, numbers and symbols !#$+,-.@_ are allowed" });
       }
 
+    // parse and validate dates
     const startDateTimestamp = parseInt(start_date, 10);
     const endDateTimestamp = parseInt(end_date, 10);
 
@@ -52,55 +54,75 @@ async function createProject(req, res) {
         });
     }
 
+    
     /**
-     * The logic below is to prevent unregistered and
-     * unverified collaborators from being added to
-     * a project. Not used for now
+     * Check that added collaborators are registered.
+     * If not, do not create the project; return a response and send the unregistered collaborators invite mails
      */
-
-    // const unregisteredCollaborators = []
+  
+    const unregisteredCollaborators = []
     // const unverifiedCollaborators = []
-    // const collaboratorEmails = await Promise.all(
-    //     collaborators.map(async collaborator => {
-    //         const user = await UserModel.findOne({email: collaborator})
-    //         if (!user) {
-    //              unregisteredCollaborators.push(collaborator)
-    //              return
-    //         }
-    //         if (user && (user.verified === false || user.verified === undefined || user.verified === null)) {
-    //             unverifiedCollaborators.push(user.email)
-    //             return
-    //         }
-    //         console.log('user email:', user.email);
-    //         return user.email
-    //     })
+    const collaboratorEmails = await Promise.all(
+        collaborators.map(async collaborator => {
+            const user = await UserModel.findOne({email: collaborator})
+            if (!user) {
+              unregisteredCollaborators.push(collaborator)
+              console.log('unregistered collab', collaborator)
+                 return
+            }
+            // if (user && (user.verified === false || user.verified === undefined || user.verified === null)) {
+            //     unverifiedCollaborators.push(user.email)
+            //     return
+            // }
+            console.log('registered collab:', user.email);
+            return user.email
+        })
 
-    // )
-    // if (unregisteredCollaborators.length> 0) {
-    //     throw new Error(`These collaborators do not exist: ${unregisteredCollaborators.join(', ')}`)
-    // }
+    )
+    if (unregisteredCollaborators.length > 0) {
+      //  send emails to all unregistered collaborators
+      for (const collaborator of unregisteredCollaborators) {
+      const emailOption = {
+        to: collaborator,
+        from: "FlowEase",
+        subject: "An Attempt to Add You to a Project",
+        html: await buildEmailTemplate("attemptedProjectAssignment.ejs", {projectCreatorName: user.full_name}),
+      };
+      await sendMail(emailOption, res);
+      }
+      
+
+      return res.status(404).json({success: false, message: `Project creation failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}`})
+    }
+    /**
+     * previously, i threw an error which i caught in
+     * the catch block cos i wanted to allow the project
+     * creation to go through
+     */
     // if (unverifiedCollaborators.length> 0) {
     //     throw new Error(`These collaborators are unverified: ${unverifiedCollaborators.join(', ')}`)
     // }
 
-    // console.log("collab emails:", collaboratorEmails);
+    console.log("collab emails:", collaboratorEmails);
 
     const project = new ProjectModel({
       name,
       description,
       user_id,
-      // collaborators: collaboratorEmails,
-      collaborators,
+      collaborators: collaboratorEmails,
+      // collaborators,
       start_date,
       end_date,
     });
 
     await project.save();
 
+    // push the created project into the project owner's array
     await UserModel.findByIdAndUpdate(user_id, {
       $push: { created_projects: project._id },
     });
 
+    // push the assigned projects into the collaborators' arrays
     await Promise.all(
       collaborators.map(async (collaborator) => {
         const assignedCollaborator = await UserModel.findOne({
@@ -121,15 +143,15 @@ async function createProject(req, res) {
         message: `You have been added to a new project with name: ${project.name}`,
         project_id: project._id,
         creator_id: user_id,
-        // collaborators: collaboratorEmails,
-        collaborators,
+        collaborators: collaboratorEmails,
         start_date,
         end_date,
       });
       }
       
-    // send emails to all added collaborators, even unregistered
-      for (const collaborator of collaborators) {
+    
+    //  send emails to all registered collaborators
+      for (const collaborator of collaboratorEmails) {
         const collaboratorName = (await UserModel.findOne({email: collaborator})).full_name
       const emailOption = {
         to: collaborator,
