@@ -30,10 +30,12 @@ async function updateProject(req, res) {
 
     const projectNameRegex = /^[a-zA-Z0-9\s!#$+,-.@_]+$/;
 
+    // Validate project name
     if (name && !projectNameRegex.test(name)) {
         return res.status(400).json({ success: false, message: "Project name contains invalid characters. Only alphabets, numbers and symbols !#$+,-.@_ are allowed" });
       }
 
+    // parse and validate dates
     const startDateTimestamp = parseInt(start_date, 10);
     const endDateTimestamp = parseInt(end_date, 10);
 
@@ -63,13 +65,49 @@ async function updateProject(req, res) {
         });
       }
       
+       // handle collaborators
        const existingCollaborators = project.collaborators;
       const newCollaborators = collaborators || [];
       
+       // find collaborators to add
        const collaboratorsToAdd = newCollaborators.filter(email => !existingCollaborators.includes(email));
         
-       const collaboratorsToRemove = existingCollaborators.filter(email => !newCollaborators.includes(email));
+       // find collaborators to remove
+    const collaboratorsToRemove = existingCollaborators.filter(email => !newCollaborators.includes(email));
+    
+    /**
+     * Check that newly added collaborators are registered.
+     * If not, do not update the project; return a response and send the unregistered collaborators invite mails
+     */
 
+    const unregisteredCollaborators = []
+    await Promise.all(
+      newCollaborators.map(async collaborator => {
+            const user = await UserModel.findOne({email: collaborator})
+            if (!user) {
+                 unregisteredCollaborators.push(collaborator)
+                 return
+            }
+        })
+
+    )
+    if (unregisteredCollaborators.length > 0) {
+      //  send emails to all unregistered collaborators
+      for (const collaborator of unregisteredCollaborators) {
+      const emailOption = {
+        to: collaborator,
+        from: "FlowEase",
+        subject: "An Attempt to Add You to a Project",
+        html: await buildEmailTemplate("attemptedProjectAssignment.ejs", {projectCreatorName: user.full_name}),
+      };
+      await sendMail(emailOption, res);
+      }
+      
+
+      return res.status(404).json({success: false, message: `Project update failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}`})
+    }
+
+      // update project
       project.name = name || project.name;
       project.description = description || project.description;
       project.start_date = startDateTimestamp || project.start_date;
@@ -78,6 +116,7 @@ async function updateProject(req, res) {
 
       await project.save();
 
+       // update user assigned_projects
        await Promise.all(collaboratorsToAdd.map(async (email) => {
         const user = await UserModel.findOne({ email });
         if (user) {
