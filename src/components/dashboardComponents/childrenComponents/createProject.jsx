@@ -70,18 +70,18 @@ const CreateProject = () => {
     });
   };
 
-  const handleAddTodo = async() => {
+  const handleAddTodo = async () => {
     //if (task.trim() === "") return;
     setBudgets([...budgets, task]);
-    const token  = localStorage.getItem("login_token");
+    const token = localStorage.getItem("login_token");
     const data = {
       name: task.name,
       description: task.description,
       start_date: startDateTimestamp,
       end_date: dueDateTimestamp,
-      collaborators: task.collaborators
+      collaborators: task.collaborators,
     };
-setLoading(true);
+    setLoading(true);
     try {
       const res = await axios.post(`${URL}/projects/create`, data, {
         headers: {
@@ -91,6 +91,16 @@ setLoading(true);
       if (res.data.success === true) {
         setLoading(false);
         toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        toast.success("collaborators will be notified by email", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -129,22 +139,19 @@ setLoading(true);
   };
 
   const formattedDate = (date) => {
-    const dateOptions = {  year: 'numeric', month: 'long', day: 'numeric' };
+    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
     const formattedDate = date.toLocaleDateString(undefined, dateOptions);
-    return `${formattedDate}`
+    return `${formattedDate}`;
   };
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Update the date every minute (optional, if you need real-time updates)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());
-    }, 60000); // Update every minute
-    // Cleanup the timer on component unmount
+    }, 60000);
     return () => clearInterval(timer);
   }, []);
-
 
   return (
     <div className=" w-full my-10">
@@ -164,7 +171,7 @@ setLoading(true);
             Create Project
           </button>
           <button className="bg-[#F5F4F8] rounded-2xl py-2.5 px-7 flex items-center justify-center font-bold border">
-           <CiCalendar/> {formattedDate(currentDate)}
+            <CiCalendar /> {formattedDate(currentDate)}
           </button>
         </div>
       </div>
@@ -242,13 +249,11 @@ setLoading(true);
                   id="start_date"
                   name="start_date"
                   value={task.start_date}
-                  onChange={(e) =>
-                   { setTask({ ...task, start_date: e.target.value })
-                   const unixTimestamp = new Date(e.target.value).getTime();
-                   setStartDateTimestamp(unixTimestamp);
-                  }
-                    
-                  }
+                  onChange={(e) => {
+                    setTask({ ...task, start_date: e.target.value });
+                    const unixTimestamp = new Date(e.target.value).getTime();
+                    setStartDateTimestamp(unixTimestamp);
+                  }}
                 />
               </div>
             </div>
@@ -267,12 +272,11 @@ setLoading(true);
                   id="end_date"
                   name="end_date"
                   value={task.end_date}
-                  onChange={(e) =>
-                    {setTask({ ...task, end_date: e.target.value })
+                  onChange={(e) => {
+                    setTask({ ...task, end_date: e.target.value });
                     const dueUnixTimestamp = new Date(e.target.value).getTime();
                     setDueDateTimestamp(dueUnixTimestamp);
-                  }
-                  }
+                  }}
                 />
               </div>
             </div>
@@ -296,8 +300,6 @@ setLoading(true);
             </div>
 
             <div className="flex gap-2 p-2 md:p-4 min-h-14 w-full ">
-             
-           
               {task.collaborators.map((collaborator, index) => (
                 <button
                   key={index}
@@ -321,17 +323,20 @@ setLoading(true);
                 </button>
               ))}
             </div>
-            <button type="button" onClick={handleAddCollaborator} className="border-b-2 border-b-primaryBlue">
+            <button
+              type="button"
+              onClick={handleAddCollaborator}
+              className="border-b-2 border-b-primaryBlue"
+            >
               Tap to Add Email
             </button>
           </div>
 
-          <button onClick={handleAddTodo} className="py-4 px-3 bg-primaryBlue rounded-md text-[white]">
-           {loading? (
-           "Creating Project..."
-          ) : (
-            "Add Task"
-          )}
+          <button
+            onClick={handleAddTodo}
+            className="py-4 px-3 bg-primaryBlue rounded-md text-[white]"
+          >
+            {loading ? "Creating Project..." : "Add Task"}
           </button>
         </div>
       </Modal>

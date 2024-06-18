@@ -132,6 +132,7 @@ const ProjectDetails = () => {
           end_date: "",
           collaborators: [""],
         });
+        window.location.reload();
         navigate(`/projects/project-details/${id}`);
       } else {
         setLoading(false);
