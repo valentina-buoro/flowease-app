@@ -8,7 +8,7 @@ async function getMilestoneStatusEnumValues(req, res) {
 
        res.status(200).json({ success: true, message: statuses });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).json("Internal server error");
   }
 }

@@ -124,7 +124,7 @@ async function updateProject(req, res) {
 
        res.status(200).json({ success: true, message: 'Project updated successfully', project });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).json("Internal server error");
   }
 }

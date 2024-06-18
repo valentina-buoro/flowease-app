@@ -12,7 +12,7 @@ async function getMilestoneById (req, res) {
         }
         res.status(200).json({success: true, message: milestone}) 
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         res.status(500).json('Internal server error')
     }
 }

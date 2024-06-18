@@ -13,7 +13,6 @@ async function filterMilestonesByProjectName(req, res) {
       }
       
       const projectName = decodeURIComponent(req.query.projectName);
-      console.log(projectName);
     if (!projectName) {
       return res
         .status(400)

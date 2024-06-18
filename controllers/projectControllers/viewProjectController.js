@@ -12,7 +12,7 @@ async function getProjectById (req, res) {
         }
         res.status(200).json({success: true, message: project}) 
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         res.status(500).json('Internal server error')
     }
 }

@@ -31,7 +31,7 @@ async function listProjects(req, res) {
       .status(200)
       .json({ success: true, message: projects });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
    
     res.status(500).json("Internal server error");
   }

@@ -39,7 +39,7 @@ async function getProjectProgressStatus(req, res) {
 
     res.status(200).json({ success: true, message: 'Not started' });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).json("Internal server error");
   }
 }

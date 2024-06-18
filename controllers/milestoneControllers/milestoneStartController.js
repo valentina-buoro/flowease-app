@@ -4,7 +4,6 @@ const UserModel = require("../../models/userModel");
 async function markMilestoneStarted(req, res) {
   try {
     const user_id = req.user.id;
-    console.log("user_id", user_id);
 
     const milestone_id = req.params.milestone_id;
     if (!milestone_id) {
@@ -22,13 +21,11 @@ async function markMilestoneStarted(req, res) {
     const collaborator = await UserModel.findOne({
       email: milestone.collaborator,
     });
-    console.log("collaborator_id", collaborator._id);
 
     const milestoneProject = await MilestoneModel.findById(milestone_id)
       .populate("project_id")
       .select("-__v");
     const project_owner_id = milestoneProject.project_id.user_id;
-    console.log("project_owner_id", project_owner_id);
 
     if (milestone.status === 'Started') {
       return res
@@ -71,7 +68,7 @@ async function markMilestoneStarted(req, res) {
         message: "Milestone successfully marked as started",
       });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 }

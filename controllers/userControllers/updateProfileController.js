@@ -23,7 +23,7 @@ async function updateUser(req, res) {
       res.status(200).json({success: true, message: updatedUser})
       
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
       res.status(500).json({success: false, message: 'Internal server error'})
     }
 }

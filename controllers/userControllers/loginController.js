@@ -46,7 +46,7 @@ async function userLogin(req, res) {
       }
     });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).json("Internal server error");
   }
 }
