@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProjectCard from '../../projectComponents/childrenComponents/project/projectCard';
 import { Link } from "react-router-dom";
-//import RecentProjectCard from "./recentProjectCard";
 
 const RecentProjects = () => {
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,6 @@ const RecentProjects = () => {
           }
         );
         setAssignedProjects(data?.message?.assigned_projects?.slice(-1)[0]);
-        console.log("assigned", data.message.assigned_project);
         setCreatedProjects(data?.message?.created_projects?.slice(-1)[0]);
         setLoading(false);
       } catch (err) {

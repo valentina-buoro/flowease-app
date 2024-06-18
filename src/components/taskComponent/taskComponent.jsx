@@ -40,9 +40,8 @@ const TaskComponent = () => {
             },
           }
         );
-        console.log(data);
+    
         setAssignedProjectName(data.message.assigned_projects);
-        console.log("assigned", data.message.assigned_projects);
         setCreatedProjectName(data.message.created_projects);
         setLoading(false);
       } catch (err) {
@@ -118,6 +117,7 @@ const TaskComponent = () => {
           onChange={(e) => {}}
         />
       </div>
+      
       <Table columns={columns} data={projectDetails} />
     </div>
   );

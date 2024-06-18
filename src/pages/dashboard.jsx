@@ -22,7 +22,6 @@ const Dashboard = () => {
           }
         );
         setData(data.message);
-        console.log(data.message);
         localStorage.setItem("full_name", data.message.full_name);
         localStorage.setItem("email", data.message.email)
         setLoading(false);

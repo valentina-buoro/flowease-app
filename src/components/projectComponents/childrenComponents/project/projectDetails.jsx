@@ -16,6 +16,7 @@ const ProjectDetails = () => {
   const [show, setShow] = React.useState(true);
   const [loading, setLoading] = useState(false);
   const [projectDetails, setProjectDetails] = useState([]);
+  const [projectStatus, setProjectStatus] = useState('')
   console.log(id);
 
   useEffect(() => {
@@ -31,7 +32,6 @@ const ProjectDetails = () => {
             },
           }
         );
-        console.log(data);
         setProjectDetails(data.message);
         console.log("assigned milestone", data.message.milestones);
         setLoading(false);
@@ -40,6 +40,30 @@ const ProjectDetails = () => {
       }
     };
     fetchProjects();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchProjectStatus = async () => {
+      const token = localStorage.getItem("login_token");
+      setLoading(true);
+      try {
+        const { data } = await axios.get(
+          `https://flowease.onrender.com/api/projects/${id}/status`,
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        console.log('project status',data);
+        setProjectStatus(data.message);
+        console.log("assigned milestone", data.message);
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+      }
+    };
+    fetchProjectStatus();
   }, [id]);
 
   const columns = [
@@ -291,7 +315,7 @@ const ProjectDetails = () => {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-[#979797] text-xs">Status</p>
-              <span>Ongoing</span>
+              <span className={`p-2 rounded md ${projectStatus === 'No milestones' ? 'bg-secondaryGrey text-[white]': projectStatus === "Not started"? "bg-[#FCCFCF] text-[#f12929]": projectStatus==="Ongoing"? "bg-[#f6e5cb] text-[#EE9612]": projectStatus === "Completed"? "bg-[#E9FFF4] text-[#069852]": null}`}>{projectStatus? projectStatus: 'N/A'}</span>
             </div>
           </div>
 
@@ -303,9 +327,10 @@ const ProjectDetails = () => {
               </div>
               <div className="p-6 bg-[#ffffff] shadow-lg mt-5">
                 <p className="text-[#1A1817] font-medium">Members</p>
+                <div className="grid grid-cols-2 gap-4">
                 {projectDetails
                   ? projectDetails?.collaborators?.map((member, index) => (
-                      <div className="flex gap-3 items-center" key={index}>
+                      <div className="col-span-1" key={index}>
                         <div className="flex items-center gap-2">
                           <img
                             src={`https://ui-avatars.com/api/?name=${member}&background=0979A1&color=fff`}
@@ -317,6 +342,7 @@ const ProjectDetails = () => {
                       </div>
                     ))
                   : null}
+                </div>
               </div>
             </div>
             <div className="col-span-1 bg-[#ffffff] shadow-lg p-6 min-h-[538px]">
