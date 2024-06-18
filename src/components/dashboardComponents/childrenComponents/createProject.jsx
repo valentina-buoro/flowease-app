@@ -117,6 +117,7 @@ const CreateProject = () => {
           end_date: "",
           collaborators: [""],
         });
+        window.location.reload();
         navigate("/projects");
       } else {
         setLoading(false);

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
   const navigate = useNavigate();
-  const URL = "https://flowease.onrender.com/api";
+  const URL = "https://redundant-discussion-zesty-star-production.pipeops.app/api";
   const [loading, setLoading] = useState(false);
   //eslint-disable-next-line
   const [errorMessage, setErrorMessage] = useState("");

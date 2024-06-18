@@ -16,7 +16,7 @@ const RecentProjects = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "https://flowease.onrender.com/api/projects/list",
+          "https://redundant-discussion-zesty-star-production.pipeops.app/api/projects/list",
           {
             headers: {
               Authorization: `${token}`,

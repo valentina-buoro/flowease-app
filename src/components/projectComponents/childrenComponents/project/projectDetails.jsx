@@ -11,7 +11,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ProjectDetails = () => {
   const navigate = useNavigate();
-  const URL = "https://flowease.onrender.com/api";
+  const URL = "https://redundant-discussion-zesty-star-production.pipeops.app/api";
   const { id } = useParams();
   const [show, setShow] = React.useState(true);
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ const ProjectDetails = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          `https://flowease.onrender.com/api/projects/${id}/project`,
+          `https://redundant-discussion-zesty-star-production.pipeops.app/api/projects/${id}/project`,
           {
             headers: {
               Authorization: `${token}`,
@@ -48,7 +48,7 @@ const ProjectDetails = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          `https://flowease.onrender.com/api/projects/${id}/status`,
+          `https://redundant-discussion-zesty-star-production.pipeops.app/api/projects/${id}/status`,
           {
             headers: {
               Authorization: `${token}`,
@@ -158,7 +158,7 @@ const ProjectDetails = () => {
     const token = localStorage.getItem("login_token");
     try {
       const { data } = await axios.put(
-        `https://flowease.onrender.com/api/milestones/${id}/started`,{},
+        `https://redundant-discussion-zesty-star-production.pipeops.app/api/milestones/${id}/started`,{},
         {
           headers: {
             Authorization: `${token}`,
@@ -198,7 +198,7 @@ const ProjectDetails = () => {
     const token = localStorage.getItem("login_token");
     try {
       const { data } = await axios.put(
-        `https://flowease.onrender.com/api/milestones/${id}/completed`,{},
+        `https://redundant-discussion-zesty-star-production.pipeops.app/api/milestones/${id}/completed`,{},
         {
           headers: {
             Authorization: `${token}`,
