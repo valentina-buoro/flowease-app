@@ -45,9 +45,7 @@ const Dashboard = () => {
     <div >
       {loading ? <div className="  h-screen"><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
       {data && (
-        <>
-          
-         
+        <>  
             <DashboardComponent data={data} />
         
         </>
