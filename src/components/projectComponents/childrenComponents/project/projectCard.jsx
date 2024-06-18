@@ -4,7 +4,7 @@ import { ProgressBar } from "react-bootstrap";
 
 const ProjectCard = ({ data }) => {
   const navigate = useNavigate();
-  const completed = data.milestones.filter(
+  const completed = data?.milestones?.filter(
     (milestone) => milestone.status === "Completed"
   ).length;
   const progress = (completed / data.milestones.length) * 100;
@@ -17,7 +17,7 @@ const ProjectCard = ({ data }) => {
         <p className="font-medium text-[15px] ">{data.name}</p>
         <p className="text-xs text-[#4E4F52]">
           Task: <span className="text-primaryGreen">{completed}</span>
-          <span>/{data.milestones.length}</span>
+          <span>/{data.milestones?.length}</span>
         </p>
         <div>
           <p className="text-[#4E4F52] text-[10px]"> Progress:</p>

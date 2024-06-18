@@ -22,6 +22,7 @@ const Dashboard = () => {
           }
         );
         setData(data.message);
+        console.log(data.message);
         localStorage.setItem("full_name", data.message.full_name);
         localStorage.setItem("email", data.message.email)
         setLoading(false);
@@ -43,7 +44,7 @@ const Dashboard = () => {
   }, []);
   return (
     <div >
-      {loading ? <div className="  h-screen"><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
+      {loading ? <div className="  h-screen "><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
       {data && (
         <>  
             <DashboardComponent data={data} />
