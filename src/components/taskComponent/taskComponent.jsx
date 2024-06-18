@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Table from '../utilComponents/table';
+//import Table from '../utilComponents/table';
 
 const TaskComponent = () => {
-    const URL = "https://flowease.onrender.com/api";
+   // const URL = "https://flowease.onrender.com/api";
   const { id } = useParams();
   const [show, setShow] = React.useState(true);
   const [loading, setLoading] = useState(false);
   const [projectDetails, setProjectDetails] = useState([]);
-  console.log(id);
+  console.log(id, show, loading, projectDetails, setShow);
 
 
   const columns = [
@@ -21,6 +21,7 @@ const TaskComponent = () => {
     {header: "Action", accessor: "action"}
    
   ];
+  console.log(columns)
 
   useEffect(() => {
     const fetchProjects = async () => {

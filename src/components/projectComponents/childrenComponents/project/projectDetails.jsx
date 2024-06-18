@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ProjectDetails = () => {
+  const navigate = useNavigate();
   const URL = "https://flowease.onrender.com/api";
   const { id } = useParams();
   const [show, setShow] = React.useState(true);
@@ -41,19 +42,15 @@ const ProjectDetails = () => {
     fetchProjects();
   }, [id]);
 
-  
-
   const columns = [
     { header: "S/N", accessor: "_id" },
-    {header:"Task Name", accessor: "name"},
-    {header:"Due Date", accessor: "due_date"},
+    { header: "Task Name", accessor: "name" },
+    { header: "Due Date", accessor: "due_date" },
     { header: "Assigned To", accessor: "collaborator" },
-    { header: "Status", accessor: "started" || "completed" },
-    {header: "Action", accessor: "action"}
-   
+    { header: "Status", accessor: "status" },
+    { header: "Action", accessor: "action" },
   ];
 
-  const navigate = useNavigate();
   // eslint-disable-next-line
   const [errorMessage, setErrorMessage] = useState("");
   const [budgets, setBudgets] = useState([]);
@@ -63,9 +60,7 @@ const ProjectDetails = () => {
     start_date: "",
     end_date: "",
     collaborators: "",
-    
   });
-
 
   const [dueDateTimestamp, setDueDateTimestamp] = useState(null);
 
@@ -77,8 +72,6 @@ const ProjectDetails = () => {
   const closeBudget = () => {
     setShowing(false);
   };
-
-  
 
   const handleAddTodo = async () => {
     setBudgets([...budgets, task]);
@@ -136,6 +129,86 @@ const ProjectDetails = () => {
     }
   };
 
+  const handleStarted = async (id) => {
+    const token = localStorage.getItem("login_token");
+    try {
+      const { data } = await axios.put(
+        `https://flowease.onrender.com/api/milestones/${id}/started`,{},
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      if (data.success === true) {
+        toast.success(data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+       
+      } 
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const handleCompleted = async(id)=> {
+    const token = localStorage.getItem("login_token");
+    try {
+      const { data } = await axios.put(
+        `https://flowease.onrender.com/api/milestones/${id}/completed`,{},
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      if (data.success === true) {
+        toast.success(data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+       
+      } 
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
+
   return (
     <div className="px-4 md:px-11  w-full">
       <div className="flex justify-between">
@@ -144,7 +217,11 @@ const ProjectDetails = () => {
 
           <IoIosArrowRoundForward className="text-[#696969]" size={30} />
 
-          <span className="text-[#696969] cursor-pointer"><Link className='no-underline text-[#696969]' to ='/projects'>Projects</Link></span>
+          <span className="text-[#696969] cursor-pointer">
+            <Link className="no-underline text-[#696969]" to="/projects">
+              Projects
+            </Link>
+          </span>
           <IoIosArrowRoundForward className="text-[#696969]" size={30} />
 
           <span className="text-textBlack">Project details</span>
@@ -197,13 +274,17 @@ const ProjectDetails = () => {
                 <div className="flex flex-col gap-2 ">
                   <span className="text-[#979797] text-xs">Start Date</span>
                   <span className="text-[#1A1817] text-xs font-medium">
-                   { projectDetails ? formatISODate(projectDetails?.start_date): ''}
+                    {projectDetails
+                      ? formatISODate(projectDetails?.start_date)
+                      : ""}
                   </span>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-[#979797] text-xs">Due Date</span>
                   <span className="text-[#1A1817] text-xs font-medium">
-                   { projectDetails ? formatISODate(projectDetails?.end_date):''}
+                    {projectDetails
+                      ? formatISODate(projectDetails?.end_date)
+                      : ""}
                   </span>
                 </div>
               </div>
@@ -222,19 +303,20 @@ const ProjectDetails = () => {
               </div>
               <div className="p-6 bg-[#ffffff] shadow-lg mt-5">
                 <p className="text-[#1A1817] font-medium">Members</p>
-                {projectDetails ?(
-                  projectDetails?.collaborators?.map((member, index) => (
-                    <div className="flex gap-3 items-center" key={index}>
-                      <div className="flex items-center gap-2">
-                        <img
-                          src={`https://ui-avatars.com/api/?name=${member}&background=0979A1&color=fff`}
-                          alt="profile"
-                          className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <p className="text-[#1A1817] font-medium">{member}</p>
+                {projectDetails
+                  ? projectDetails?.collaborators?.map((member, index) => (
+                      <div className="flex gap-3 items-center" key={index}>
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={`https://ui-avatars.com/api/?name=${member}&background=0979A1&color=fff`}
+                            alt="profile"
+                            className="w-10 h-10 object-cover rounded-full"
+                          />
+                          <p className="text-[#1A1817] font-medium">{member}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))) : null}
+                    ))
+                  : null}
               </div>
             </div>
             <div className="col-span-1 bg-[#ffffff] shadow-lg p-6 min-h-[538px]">
@@ -267,7 +349,12 @@ const ProjectDetails = () => {
               Add New Task
             </button>
           </div>
-          <Table columns={columns} data={ projectDetails&& projectDetails.milestones} />
+          <Table
+            columns={columns}
+            data={projectDetails && projectDetails.milestones}
+            handleStarted={handleStarted}
+            handleCompleted={handleCompleted}
+          />
 
           <Modal
             isOpen={showing}
@@ -326,41 +413,39 @@ const ProjectDetails = () => {
                   />
                 </div>
               </div>
-           
-                
-                <div className="mb-4 md:mb-6 ">
-                  <label
-                    className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
-                    htmlFor="end_date"
-                  >
-                    Due Date <FaAsterisk className="text-[red]" size={7} />
-                  </label>
-                  <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
-                    <input
-                      className="bg-inherit w-full border-none outline-none placeholder:text-sm"
-                      placeholder="e.g. Website Design"
-                      type="date"
-                      id="end_date"
-                      name="end_date"
-                      value={task.end_date}
-                      onChange={(e) => {
-                        setTask({ ...task, end_date: e.target.value });
-                        const dueUnixTimestamp = new Date(
-                          e.target.value
-                        ).getTime();
-                        setDueDateTimestamp(dueUnixTimestamp);
-                      }}
-                    />
-                  </div>
-          
+
+              <div className="mb-4 md:mb-6 ">
+                <label
+                  className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+                  htmlFor="end_date"
+                >
+                  Due Date <FaAsterisk className="text-[red]" size={7} />
+                </label>
+                <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
+                  <input
+                    className="bg-inherit w-full border-none outline-none placeholder:text-sm"
+                    placeholder="e.g. Website Design"
+                    type="date"
+                    id="end_date"
+                    name="end_date"
+                    value={task.end_date}
+                    onChange={(e) => {
+                      setTask({ ...task, end_date: e.target.value });
+                      const dueUnixTimestamp = new Date(
+                        e.target.value
+                      ).getTime();
+                      setDueDateTimestamp(dueUnixTimestamp);
+                    }}
+                  />
+                </div>
               </div>
               <div className="mb-4 md:mb-6">
-              <label
-                    className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
-                    htmlFor="collaborators"
-                  >
-                    Assignee <FaAsterisk className="text-[red]" size={7} />
-                  </label>
+                <label
+                  className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+                  htmlFor="collaborators"
+                >
+                  Assignee <FaAsterisk className="text-[red]" size={7} />
+                </label>
                 <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
                   <input
                     className="bg-transparent w-full border-none outline-none placeholder:text-sm"
@@ -371,12 +456,8 @@ const ProjectDetails = () => {
                     onChange={(e) =>
                       setTask({ ...task, collaborators: e.target.value })
                     }
-                  
                   />
                 </div>
-
-                
-                
               </div>
 
               <button

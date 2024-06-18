@@ -2,37 +2,19 @@ import React from "react";
 import { formatISODate } from "./formatDate";
 import Edit from '../../assets/svgs/edit.svg'
 
-const Table = ({ columns, data }) => {
-  const getStatusColor = (started ,completed) => {
-    switch (started ) {
-      case false:
+const Table = ({ columns, data, handleStarted, handleCompleted }) => {
+  const getStatusColor = (status) => {
+    switch (status ) {
+      case "Not started":
         return "#FFA07A";
-      case  true:
+      case  "Completed":
         return "#E9FFF4";
-      case "suspended":
+      case "Started":
         return "#FCCFCF";
-      case "closed":
-        return "#FCCFCF";
-      case "blocked":
-        return "#FCCFCF";
-      case "inactive":
-        return "#D9D9D9";
       default:
+        return "transparent"
     }
-    switch (completed ) {
-      case  true:
-        return "#E9FFF4";
-      case "suspended":
-        return "#FCCFCF";
-      case "closed":
-        return "#FCCFCF";
-      case "blocked":
-        return "#FCCFCF";
-      case "inactive":
-        return "#D9D9D9";
-      default:
-        return "transparent";
-    }
+    
   
   };
 
@@ -68,17 +50,23 @@ const Table = ({ columns, data }) => {
                   "N/A"
                 ) : column.accessor === "status" || column.accessor === "started" ? (
                   <p
-                    className=" text-center rounded-md"
+                    className=" text-center py-1 rounded-lg"
                     style={{
                       backgroundColor: getStatusColor(row[column.accessor]),
                     }}
                   >
-                    {row[column.accessor]===false ? "Pending" : "completed"}
+                    {row[column.accessor]}
                   </p>
                 ) :column.header === "Action" ? (
-                 <button className="bg-[#E9EDFF]  rounded-md p-1">
+                <div className="flex gap-3 items-end justify-end">
+                 <button className="bg-[#E9EDFF] text-sm  rounded-md p-1 flex items-center justify-center font-bold"  onClick={() => handleStarted(row["_id"])}>
                     <img src={Edit} className="w-[15px] h-[15px]" alt="edit" />
+                    Mark as Started
                   </button>
+                  <button className="bg-[#E9EDFF] text-sm rounded-md p-1 flex items-center justify-center font-bold" onClick={()=>handleCompleted(row["_id"])}>
+                  <img src={Edit} className="w-[15px] h-[15px]" alt="edit" />
+                  Mark as Completed
+                </button></div>
                 ) : (
                   row[column.accessor]
                 )}

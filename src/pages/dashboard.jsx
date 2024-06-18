@@ -20,11 +20,9 @@ const Dashboard = () => {
             },
           }
         );
-        console.log(data);
         setData(data.message);
         localStorage.setItem("full_name", data.message.full_name);
         localStorage.setItem("email", data.message.email)
-        console.log("assigned", data.message);
         setLoading(false);
       } catch (err) {
         setLoading(false);
