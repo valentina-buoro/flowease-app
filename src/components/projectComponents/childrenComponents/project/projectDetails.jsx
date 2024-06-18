@@ -470,7 +470,7 @@ const ProjectDetails = () => {
         isOpen={showProjectModal}
         onClose={closeProject}
         onAdd={handleUpdateProject}
-        className="w-screen md:w-3/5 mx-auto bg-[#fff] border bg-opacity-100 h-full  rounded-2xl py-10 mt-5 "
+        className="w-screen md:w-3/5 mx-auto bg-[#fff] border bg-opacity-100 h-full overflow-y-scroll rounded-2xl py-10 mt-5 "
       >
         <div className="flex flex-col gap-4 px-14 ">
           <div className="flex justify-between">
@@ -662,7 +662,7 @@ const ProjectDetails = () => {
             isOpen={showing}
             onClose={closeBudget}
             onAdd={handleAddTodo}
-            className="w-screen md:w-3/5 mx-auto bg-[#fff] border h-screen bg-opacity-100 rounded-2xl py-10 mt-5 "
+            className="w-screen md:w-3/5 mx-auto bg-[#fff] border h-screen overflow-x-scroll bg-opacity-100 rounded-2xl py-10 mt-5 "
           >
             <div className="flex flex-col gap-4 px-14 ">
               <div className="flex justify-between">

@@ -163,7 +163,7 @@ const CreateProject = () => {
         isOpen={show}
         onClose={closeBudget}
         onAdd={handleAddTodo}
-        className="w-screen md:w-3/5 mx-auto bg-[#fff] border bg-opacity-100 h-full  rounded-2xl py-10 mt-5 "
+        className="w-screen md:w-3/5 mx-auto bg-[#fff] border bg-opacity-100 h-full overflow-y-scroll rounded-2xl py-10 mt-5 "
       >
         <div className="flex flex-col gap-4 px-14 ">
           <div className="flex justify-between">

@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../assets/svgs/dashboardLogo.svg";
-import { NavLink } from "react-router-dom";
+import Logout from "../../assets/svgs/logoutIcon.svg";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   TbLayoutDashboard,
   TbCube,
@@ -20,7 +21,7 @@ const dashboardRoutes = [
   {
     icon: <TbCube size={20} />,
     label: " Projects",
-    href: "/projects" ,
+    href: "/projects",
   },
   {
     icon: <TbListCheck size={20} />,
@@ -50,6 +51,11 @@ const dashboardRoutes = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+   navigate("/");
+  };
   return (
     <nav className="hidden md:flex flex-col bg-primaryBlue h-full md:w-64 fixed top-0 left-0 overflow-y-auto shadow-sm px-4 md:px-10">
       <div className="flex items-center justify-center mt-8 mb-14">
@@ -75,8 +81,11 @@ const Navbar = () => {
           );
         })}
       </div>
-
-  
+      
+      <div className="mt-auto pb-2"><button className="flex flex-row items-center gap-x-2 w-full py-2.5 px-4 text-[#fff] no-underline " onClick={handleLogout}>
+        <img src={Logout} alt="logout" className="mr-2 p-1 rounded-full bg-[white]" />
+        Logout
+      </button></div>
     </nav>
   );
 };
