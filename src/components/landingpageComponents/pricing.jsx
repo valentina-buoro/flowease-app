@@ -8,7 +8,7 @@ const Pricing = () => {
   const [basic, setBasic] = React.useState(false);
   const [premium, setPremium] = React.useState(false);
   return (
-    <div className="bg-[#fff]">
+    <div className="bg-[#fff]" id='pricing'>
       <div className="text-center  py-10">
         <p className="text-[#1E1F24] font-bold text-5xl">Flexible Pricing</p>
         <p className="text-[#8E8E93] font-normal text-2xl">

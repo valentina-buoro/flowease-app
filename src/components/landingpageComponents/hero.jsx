@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Content */}
       <div className="w-full lg:w-3/5 lg:pr-8 flex flex-col gap-5">
         <h1 className="text-xl sm:text-3xl text-left  md:text-5xl font-bold md:leading-10 lg:leading-16 tracking-wider text-black">
-          Optimize Your Productivity and <span className="text-primaryGreen">Performance</span>
+          Optimize Your Productivity <br/> <br/> and <span className="text-primaryGreen">Performance</span>
         </h1>
         <p className="text-base text-left lg:text-xl font-medium text-secondaryGrey">
           Flowease is that vision made real. It's your one-stop shop for

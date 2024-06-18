@@ -3,7 +3,7 @@ import dashboard from "../../assets/images/landingpageImages/dashboardPicture.pn
 
 const Contact = () => {
   return (
-    <div>
+    <div id='contact-us'>
       <div className="grid grid-cols-12 gap-4 mx-auto mt-10">
         <div className="col-span-7 flex flex-col items-center justify-center">
           <div className=" w-[494px]">
