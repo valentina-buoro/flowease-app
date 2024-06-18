@@ -21,8 +21,7 @@ const CreateProject = () => {
     start_date: "",
     end_date: "",
     collaborators: [""],
-    /*receiverBank: "",
-    accNumber: "",*/
+   
   });
 
   const [startDateTimestamp, setStartDateTimestamp] = useState(null);

@@ -17,6 +17,14 @@ const ProjectDetails = () => {
   const [loading, setLoading] = useState(false);
   const [projectDetails, setProjectDetails] = useState([]);
   const [projectStatus, setProjectStatus] = useState('')
+  const [showProjectModal, setShowProjectModal] = useState(false);
+
+  const [dueDateTimestamp, setDueDateTimestamp] = useState(null);
+  const [showing, setShowing] = useState(false);
+  const [projectStartDateTimestamp, setProjectStartDateTimestamp] = useState(null);
+  const [projectDueDateTimestamp, setProjectDueDateTimestamp] = useState(null);
+
+  
   console.log(id);
 
   useEffect(() => {
@@ -86,10 +94,15 @@ const ProjectDetails = () => {
     collaborators: "",
   });
 
-  const [dueDateTimestamp, setDueDateTimestamp] = useState(null);
+  const [updateProject, setUpdateProject] = useState({
+    name: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    collaborators: [""],
+  });
 
-  const [showing, setShowing] = useState(false);
-
+  
   const showBudget = () => {
     setShowing(true);
   };
@@ -234,6 +247,104 @@ const ProjectDetails = () => {
     }
   }
 
+ 
+
+  const showProject = () => {
+    setShowProjectModal(true);
+  };
+  const closeProject = () => {
+    setShowProjectModal(false);
+  };
+
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    if (index !== undefined) {
+      const newCollaborators = [...task.collaborators];
+      newCollaborators[index] = value;
+      setUpdateProject({
+        ...updateProject,
+        collaborators: newCollaborators,
+      });
+    } else {
+      setUpdateProject({
+        ...updateProject,
+        [name]: value,
+      });
+    }
+  };
+  const handleAddCollaborator = () => {
+    setUpdateProject({
+      ...updateProject,
+      collaborators: [...task.collaborators, ""],
+    });
+  };
+
+  const handleRemoveCollaborator = (index) => {
+    const newCollaborators = task.collaborators.filter((_, i) => i !== index);
+    setUpdateProject({
+      ...updateProject,
+      collaborators: newCollaborators,
+    });
+  };
+
+  const handleUpdateProject = async () => {
+  
+    const token = localStorage.getItem("login_token");
+    const data = {
+      name: updateProject.name,
+      description: updateProject.description,
+      start_date: projectStartDateTimestamp,
+      end_date: projectDueDateTimestamp,
+      collaborators: updateProject.collaborators,
+    };
+    setLoading(true);
+    try {
+      const res = await axios.put(`${URL}/projects/${id}/edit`, data, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      if (res.data.success === true) {
+        setLoading(false);
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setTask({
+          name: "",
+          description: "",
+          start_date: "",
+          end_date: "",
+          collaborators: [""],
+        });
+        window.location.reload();
+        navigate(`/projects/project-details/${id}`);
+      } else {
+        setLoading(false);
+        setErrorMessage(res.data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.log("task", data.milestones);
+    }
+  };
+
   return (
     <div className="px-4 md:px-11  w-full">
       <div className="flex justify-between">
@@ -253,7 +364,7 @@ const ProjectDetails = () => {
         </div>
         {show ? (
           <div className="flex">
-            <button className="bg-primaryBlue w-full text-[#ffff] rounded-2xl py-3 px-9  font-bold">
+            <button className="bg-primaryBlue w-full text-[#ffff] rounded-2xl py-3 px-9  font-bold" onClick={showProject}>
               Edit
             </button>
           </div>
@@ -355,6 +466,170 @@ const ProjectDetails = () => {
               </ul>
             </div>
           </div>
+          <Modal
+        isOpen={showProjectModal}
+        onClose={closeProject}
+        onAdd={handleUpdateProject}
+        className="w-screen md:w-3/5 mx-auto bg-[#fff] border bg-opacity-100 h-full  rounded-2xl py-10 mt-5 "
+      >
+        <div className="flex flex-col gap-4 px-14 ">
+          <div className="flex justify-between">
+            <div className="text-3xl text-left text-[#020202] font-bold">
+              Update Project
+            </div>
+            <div
+              onClick={closeProject}
+              className="flex justify-end bg-secondaryGrey/10 rounded-lg"
+            >
+              <IoCloseOutline className="font-bold" size={30} />
+            </div>
+          </div>
+          <div className="mb-4 md:mb-6">
+            <label
+              className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+              htmlFor="title"
+            >
+              Title <FaAsterisk className="text-[red]" size={7} />
+            </label>
+            <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
+              <input
+                className="bg-inherit w-full border-none outline-none placeholder:text-sm"
+                placeholder="e.g. Website Design"
+                id="name"
+                name="name"
+                value={updateProject.name}
+                onChange={(e) => setUpdateProject({ ...updateProject, name: e.target.value })}
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-4 md:mb-6">
+            <label
+              className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+              htmlFor="title"
+            >
+              Description <FaAsterisk className="text-[red]" size={7} />
+            </label>
+            <div className="flex justify-between p-2 md:px-4 md:py-8 w-full rounded-lg border border-[#E7E7E7] ">
+              <input
+                className="bg-inherit w-full border-none outline-none placeholder:text-sm"
+                placeholder="e.g. Website Design"
+                id="description"
+                name="description"
+                value={updateProject.description}
+                onChange={(e) =>
+                  setUpdateProject({ ...updateProject, description: e.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="flex w-full gap-6 justify-between">
+            <div className="mb-4 md:mb-6 basis-1/2">
+              <label
+                className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+                htmlFor="start_date"
+              >
+                Start Date <FaAsterisk className="text-[red]" size={7} />
+              </label>
+              <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
+                <input
+                  className="bg-inherit w-full border-none outline-none placeholder:text-sm"
+                  placeholder="e.g. Website Design"
+                  type="date"
+                  id="start_date"
+                  name="start_date"
+                  value={updateProject.start_date}
+                  onChange={(e) => {
+                    setUpdateProject({ ...updateProject, start_date: e.target.value });
+                    const unixTimestamp = new Date(e.target.value).getTime();
+                    setProjectStartDateTimestamp(unixTimestamp);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="mb-4 md:mb-6 basis-1/2">
+              <label
+                className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2 flex"
+                htmlFor="end_date"
+              >
+                Due Date <FaAsterisk className="text-[red]" size={7} />
+              </label>
+              <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
+                <input
+                  className="bg-inherit w-full border-none outline-none placeholder:text-sm"
+                  placeholder="e.g. Website Design"
+                  type="date"
+                  id="end_date"
+                  name="end_date"
+                  value={updateProject.end_date}
+                  onChange={(e) => {
+                    setUpdateProject({ ...updateProject, end_date: e.target.value });
+                    const dueUnixTimestamp = new Date(e.target.value).getTime();
+                    setProjectDueDateTimestamp(dueUnixTimestamp);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mb-4 md:mb-6">
+            <label
+              className="font-medium text-base md:text-[18px] text-[#0D0D0D] mb-2"
+              htmlFor="collaborators"
+            >
+              Invite Team Members
+            </label>
+            <div className="flex justify-between p-2 md:p-4 w-full rounded-lg border border-[#E7E7E7] ">
+              <input
+                className="bg-transparent w-full border-none outline-none placeholder:text-sm"
+                placeholder="e.g. Website Design"
+                id="collaborators"
+                name="collaborators"
+                value={updateProject.collaborators}
+                disabled
+              />
+            </div>
+
+            <div className="flex gap-2 p-2 md:p-4 min-h-14 w-full ">
+              {updateProject.collaborators.map((collaborator, index) => (
+                <button
+                  key={index}
+                  className="bg-[#8495F8] flex border  p-2 md:px-2.5 md:py-1.5 rounded-md text-[#F6F6F6] "
+                >
+                  <input
+                    type="email"
+                    className="bg-[#8495F8] w-full border-none outline-none placeholder:text-sm text-[#F6F6F6]"
+                    placeholder="e.g. Website Design"
+                    id="collaborators"
+                    name="collaborators"
+                    value={collaborator}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveCollaborator(index)}
+                  >
+                    X
+                  </button>
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={handleAddCollaborator}
+              className="border-b-2 border-b-primaryBlue"
+            >
+              Tap to Add Email
+            </button>
+          </div>
+
+          <button
+            onClick={handleUpdateProject}
+            className="py-4 px-3 bg-primaryBlue rounded-md text-[white]"
+          >
+            {loading ? "Updating Project..." : "Update Project"}
+          </button>
+        </div>
+      </Modal>
         </div>
       ) : (
         <div>
