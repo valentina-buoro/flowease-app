@@ -337,7 +337,7 @@ const CreateProject = () => {
             onClick={handleAddTodo}
             className="py-4 px-3 bg-primaryBlue rounded-md text-[white]"
           >
-            {loading ? "Creating Project..." : "Add Task"}
+            {loading ? "Creating Project..." : "Create Project"}
           </button>
         </div>
       </Modal>
