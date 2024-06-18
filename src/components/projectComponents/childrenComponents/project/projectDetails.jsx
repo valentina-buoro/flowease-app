@@ -360,9 +360,9 @@ const ProjectDetails = () => {
             isOpen={showing}
             onClose={closeBudget}
             onAdd={handleAddTodo}
-            className="w-screen md:w-3/5 mx-auto bg-[#fff] border h-screen overflow-scroll bg-opacity-100 rounded-2xl py-10 mt-5 "
+            className="w-screen md:w-3/5 mx-auto bg-[#fff] border h-screen overflow-y-scroll bg-opacity-100 rounded-2xl py-10 mt-5 "
           >
-            <div className="flex flex-col gap-4 px-14 overflow-scroll">
+            <div className="flex flex-col gap-4 px-14 ">
               <div className="flex justify-between">
                 <div className="text-3xl text-left text-[#020202] font-bold">
                   Add New Task
