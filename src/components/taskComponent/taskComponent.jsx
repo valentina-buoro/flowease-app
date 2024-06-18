@@ -109,7 +109,7 @@ const TaskComponent = () => {
           ))}
         </select>
       </div>
-      <div className=" bg-[#EDEDEE] border border-[#EDEDEE] rounded-md  pl-3 bg-transparent w-[300px] h-[40px] mt-4">
+      <div className=" bg-[#EDEDEE] border border-[#EDEDEE] rounded-md pl-3 bg-transparent w-[300px] h-[40px] mt-4">
         <input
           className="outline-none border-none w-full bg-transparent"
           id="input-placeholder"
