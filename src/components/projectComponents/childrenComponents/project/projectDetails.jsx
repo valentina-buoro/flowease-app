@@ -228,8 +228,8 @@ const ProjectDetails = () => {
         </div>
         {show ? (
           <div className="flex">
-            <button className="bg-primaryBlue w-full text-[#ffff] rounded-2xl py-3 px-7  font-bold">
-              Create Project
+            <button className="bg-primaryBlue w-full text-[#ffff] rounded-2xl py-3 px-9  font-bold">
+              Edit
             </button>
           </div>
         ) : null}
