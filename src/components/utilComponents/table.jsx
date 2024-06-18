@@ -58,7 +58,7 @@ const Table = ({ columns, data, handleStarted, handleCompleted }) => {
                     {row[column.accessor]}
                   </p>
                 ) :column.header === "Action" ? (
-                <div className="flex gap-3 items-end justify-end">
+                <div className=" flex gap-3 items-center justify-center ">
                  <button className="bg-[#E9EDFF] text-sm  rounded-md p-1 flex items-center justify-center font-bold"  onClick={() => handleStarted(row["_id"])}>
                     <img src={Edit} className="w-[15px] h-[15px]" alt="edit" />
                     Mark as Started
