@@ -1,40 +1,12 @@
-const ProjectModel = require("../../models/projectModel");
+const MilestoneModel = require("../../models/milestoneModel");
 
 async function listMilestones(req, res) {
   try {
-    const user_id = req.user.id;
-      const projectName = decodeURIComponent(req.query.projectName);
-      console.log(projectName);
-    if (!projectName) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Please provide the project name" });
-    }
-
-    const projects = await ProjectModel.find({
-        name: { $regex: new RegExp(projectName, "i") }, // case-insensitive search
-        $or: [
-          { user_id: user_id },
-          { collaborators: { $in: [req.user.email] } }
-        ]
-    }).populate('milestones');
-    
-      if (projects.length < 1) {
-        return res
-      .status(400)
-      .json({ success: false, message: "No project with the provided name was found" })
-    }
+      const milestones = await MilestoneModel.find({ collaborator: req.user.email })
       
-      const milestones = projects.reduce((acc, project) => {
-          acc.push(...project.milestones)
-          return acc
-      }, [])
-
       if (milestones.length < 1) {
-        return res
-      .status(400)
-      .json({ success: false, message: "No milestone for the provided project was found" })
-    }
+        return res.status(404).json({ success: false, message: "No milestones found for you" });
+      }
     
     res
       .status(200)
