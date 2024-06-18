@@ -315,7 +315,7 @@ const ProjectDetails = () => {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-[#979797] text-xs">Status</p>
-              <span className={`p-2 rounded md ${projectStatus === 'No milestones' ? 'bg-secondaryGrey text-[white]': projectStatus === "Not started"? "bg-[#FCCFCF] text-[#f12929]": projectStatus==="Ongoing"? "bg-[#f6e5cb] text-[#EE9612]": projectStatus === "Completed"? "bg-[#E9FFF4] text-[#069852]": null}`}>{projectStatus? projectStatus: 'N/A'}</span>
+              <span className={`p-2 rounded md ${projectStatus === 'No milestones' ? 'bg-secondaryGrey text-[white]': projectStatus === "Not started"? " bg-[#f12929] text-[white]": projectStatus==="Ongoing"? "bg-[#ECA234] text-[white]": projectStatus === "Completed"? "bg-[#069852] text-[white]": null}`}>{projectStatus? projectStatus: 'N/A'}</span>
             </div>
           </div>
 
