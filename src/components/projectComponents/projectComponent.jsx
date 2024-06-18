@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CreateProject from "./childrenComponents/createProject";
 import ProjectCard from "./childrenComponents/project/projectCard";
+import { CircleLoader } from "react-spinners";
 import {  toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -89,7 +90,7 @@ const ProjectComponent = () => {
           </p>
         </div>
       </div>
-      {loading ? <div>Loading...</div> : null}
+      {loading ? <div className="  h-screen"><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
       {all && (
         <div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-y-10 gap-x-6">

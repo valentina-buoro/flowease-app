@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardComponent from "../components/dashboardComponents/dashboardComponent";
+import { CircleLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -42,7 +43,7 @@ const Dashboard = () => {
   }, []);
   return (
     <div >
-      {loading ? <div>Loading </div> : null}
+      {loading ? <div className="  h-screen"><div className="h-1/2 flex items-center justify-center"><CircleLoader color='#15226C' size={100}/></div> </div> : null}
       {data && (
         <>
           
