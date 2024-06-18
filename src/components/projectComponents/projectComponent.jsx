@@ -58,7 +58,7 @@ const ProjectComponent = () => {
       <div>
         <div className="flex">
           <p
-            className={all? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue': 'text-lg mr-5'}
+            className={all? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue cursor-pointer': 'cursor-pointer text-lg mr-5'}
             onClick={() => {
               setAll(true);
               setCreated(false);
@@ -68,7 +68,7 @@ const ProjectComponent = () => {
             All
           </p>
           <p
-          className={created? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue': 'text-lg mr-5'}
+          className={created? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue cursor-pointer': 'cursor-pointer text-lg mr-5'}
             onClick={() => {
               setCreated(true);
               setAll(false);
@@ -78,7 +78,7 @@ const ProjectComponent = () => {
             Created
           </p>
           <p
-          className={assigned? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue': 'text-lg mr-5'}
+          className={assigned? 'text-lg mr-5 text-primaryBlue border-b-2 border-b-primaryBlue cursor-pointer': 'cursor-pointer text-lg mr-5'}
             onClick={() => {
               setAssigned(true);
               setAll(false);

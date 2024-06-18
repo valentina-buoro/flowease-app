@@ -6,11 +6,26 @@ const Table = ({ columns, data, handleStarted, handleCompleted }) => {
   const getStatusColor = (status) => {
     switch (status ) {
       case "Not started":
-        return "#FFA07A";
+        return "#FCCFCF";
       case  "Completed":
         return "#E9FFF4";
       case "Started":
-        return "#FCCFCF";
+        return "#f6e5cb";
+      default:
+        return "transparent"
+    }
+    
+  
+  };
+
+  const getStatusColorText = (status) => {
+    switch (status ) {
+      case "Not started":
+        return "#f12929";
+      case  "Completed":
+        return "#069852";
+      case "Started":
+        return "#EE9612";
       default:
         return "transparent"
     }
@@ -53,6 +68,7 @@ const Table = ({ columns, data, handleStarted, handleCompleted }) => {
                     className=" text-center py-1 rounded-lg"
                     style={{
                       backgroundColor: getStatusColor(row[column.accessor]),
+                      color: getStatusColorText(row[column.accessor]),
                     }}
                   >
                     {row[column.accessor]}
