@@ -7,6 +7,7 @@ const getMilestoneById = require('../controllers/milestoneControllers/viewMilest
 const getMilestoneStatusEnumValues = require('../controllers/milestoneControllers/getStatusEnumValuesController')
 const updateMilestone = require('../controllers/milestoneControllers/updateMilestoneController')
 const listMilestones = require('../controllers/milestoneControllers/listMilestonesController')
+const filterMilestonesByProjectName = require('../controllers/milestoneControllers/filterMilestonesController')
 const milestoneRouter = express.Router()
 
 milestoneRouter.post('/:project_id/create', authenticate, createMilestone)
@@ -16,5 +17,6 @@ milestoneRouter.get('/:milestone_id/milestone', getMilestoneById)
 milestoneRouter.get('/statuses', getMilestoneStatusEnumValues)
 milestoneRouter.put('/:milestone_id/edit', authenticate, updateMilestone)
 milestoneRouter.get("/", authenticate, listMilestones);
+milestoneRouter.get('/filter', authenticate, filterMilestonesByProjectName) // `projectName` provided in the query string e.g '/milestones/filter?projectName=test'
 
 module.exports = milestoneRouter
