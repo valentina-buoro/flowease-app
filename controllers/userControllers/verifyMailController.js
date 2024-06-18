@@ -44,7 +44,6 @@ async function sendConfirmationMail(req, res) {
     };
     await sendMail(emailOption, res);
     // redirect the user from mail
-    // res.redirect("https://flowease.onrender.com/api");
     res.redirect("https://ceaseless-box-immense-rabbits-production.pipeops.app/");
   } catch (error) {
     console.error(error.message);

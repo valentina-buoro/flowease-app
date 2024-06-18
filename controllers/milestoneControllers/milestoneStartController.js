@@ -48,7 +48,7 @@ async function markMilestoneStarted(req, res) {
       const io = req.io;
       io.emit("milestone_started", {
         type: "milestone_started",
-        message: `Started the milestone: '${milestone.name}' for project: '${milestoneProject.project_id.name}'`,
+        message: `${collaborator.full_name} started the milestone: '${milestone.name}' for project: '${milestoneProject.project_id.name}'`,
         milestone_id: milestone._id,
         project_id: milestoneProject.project_id,
         creator_id: project_owner_id,

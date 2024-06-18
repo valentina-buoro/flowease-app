@@ -29,7 +29,7 @@ async function createUser(req, res) {
     await sendMail(emailOption, res);
     res
       .status(201)
-      .json({ success: true, message: "User created successfully" });
+      .json({ success: true, message: "Your registration was successful" });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
