@@ -28,7 +28,8 @@ const Signup = () => {
   };
 
   
-  const submitFormData = async () => {
+  const submitFormData = async (e) => {
+    e.preventDefault();
     if (
       formData.full_name === "" ||
       formData.email === "" ||

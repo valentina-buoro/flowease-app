@@ -25,7 +25,8 @@ const Login = () => {
     });
   };
 
-  const submitFormData = async () => {
+  const submitFormData = async (e) => {
+    e.preventDefault();
     if (
       formData.email === "" ||
       formData.password === ""
