@@ -104,7 +104,7 @@ async function updateProject(req, res) {
       }
       
 
-      return res.status(404).json({success: false, message: `Project update failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}`})
+      return res.status(404).json({success: false, message: `Project update failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}. An invite  has been sent to their email.`})
     }
 
       // update project

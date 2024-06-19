@@ -29,7 +29,7 @@ async function userLogin(req, res) {
         if (!user.verified) {
           return res
             .status(401)
-            .json({ success: false, message: "You are not verified" });
+            .json({ success: false, message: "You are not verified. Please check your email inbox or spam and click the verification link" });
         }
 
         const token = jwt.sign(

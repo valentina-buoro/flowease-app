@@ -92,7 +92,7 @@ async function createProject(req, res) {
       }
       
 
-      return res.status(404).json({success: false, message: `Project creation failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}`})
+      return res.status(404).json({success: false, message: `Project creation failed because of unregistered collaborator: ${unregisteredCollaborators.join(', ')}. An invite  has been sent to their email.`})
     }
     /**
      * previously, i threw an error which i caught in
